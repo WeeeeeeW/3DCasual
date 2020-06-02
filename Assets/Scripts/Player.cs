@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
-    public bool grounded;
+    private bool grounded;
     [SerializeField] private Vector3[] Target;
     private Rigidbody rigidbody;
     private bool blockedLeft, blockedRight;
+    private GameObject playerSprite;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        playerSprite = gameObject.transform.GetChild(0).gameObject;
     }
 
    
@@ -54,22 +57,26 @@ public class Player : MonoBehaviour
         switch (direction)
         {
             case "left":
+                playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 270, 0);
                 Target[0] = GameObject.Find("LeftJump").transform.position;
                 Target[1] = GameObject.Find("LeftLand").transform.position;
                 break;
             case "right":
+                playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
                 Target[0] = GameObject.Find("RightJump").transform.position;
                 Target[1] = GameObject.Find("RightLand").transform.position;     
                 break;
         }
         while (Vector3.Distance(transform.position, Target[0]) > 0.1f)
         {
+            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, .8f, .8f), .5f);
             transform.position = Vector3.Lerp(transform.position, Target[0], 0.35f);
             yield return new WaitForSeconds(.01f);
         }
         while (Vector3.Distance(transform.position, Target[1]) > 0.1f)
         {
             rigidbody.useGravity = true;
+            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), .5f);
             transform.position = Vector3.Lerp(transform.position, Target[1], 0.35f);
             yield return new WaitForSeconds(.01f);
         }
