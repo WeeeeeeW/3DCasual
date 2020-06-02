@@ -10,11 +10,13 @@ public class Player : MonoBehaviour
     private Rigidbody rigidbody;
     private bool blockedLeft, blockedRight;
     private GameObject playerSprite;
+    private ParticleSystem landingParticle;
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         playerSprite = gameObject.transform.GetChild(0).gameObject;
+        landingParticle = gameObject.transform.FindChild("Landing Particle").GetComponent<ParticleSystem>();
     }
 
    
@@ -69,20 +71,27 @@ public class Player : MonoBehaviour
         }
         while (Vector3.Distance(transform.position, Target[0]) > 0.1f)
         {
-            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, .8f, .8f), .5f);
+            playerSprite.gameObject.transform.localScale = Vector3.Lerp(playerSprite.gameObject.transform.localScale, new Vector3(1, .7f, .7f), .35f);
             transform.position = Vector3.Lerp(transform.position, Target[0], 0.35f);
             yield return new WaitForSeconds(.01f);
         }
         while (Vector3.Distance(transform.position, Target[1]) > 0.1f)
         {
             rigidbody.useGravity = true;
-            transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1, 1), .5f);
+            playerSprite.gameObject.transform.localScale = Vector3.Lerp(playerSprite.gameObject.transform.localScale, new Vector3(1, 1, 1), .35f);
             transform.position = Vector3.Lerp(transform.position, Target[1], 0.35f);
             yield return new WaitForSeconds(.01f);
         }
         yield return null;
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.tag == "Platform")
+        {
+            landingParticle.Play();
+        }
+    }
     private void OnCollisionStay(Collision collision)
     {
         if (collision.transform.tag == "Platform")

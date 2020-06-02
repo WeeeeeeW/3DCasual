@@ -2267,6 +2267,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1371623850964533068, guid: 32b6527fbf85c3a469a0af14c4d09025,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 3951048513688197310, guid: 32b6527fbf85c3a469a0af14c4d09025,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2322,21 +2327,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5267690198803091422, guid: 32b6527fbf85c3a469a0af14c4d09025,
+    - target: {fileID: 8457936506319264244, guid: 32b6527fbf85c3a469a0af14c4d09025,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: -4453226876406926323, guid: 1a6e817c9acbb2b40ba21f6d2adbebdd,
-        type: 3}
-    - target: {fileID: 8335676368308196086, guid: 32b6527fbf85c3a469a0af14c4d09025,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8335676369232210209, guid: 32b6527fbf85c3a469a0af14c4d09025,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.8
+      propertyPath: m_Name
+      value: Landing Particle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32b6527fbf85c3a469a0af14c4d09025, type: 3}
