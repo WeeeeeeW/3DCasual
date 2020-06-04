@@ -5,6 +5,7 @@ using UnityEditor;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
     private bool grounded;
     [SerializeField] private Vector3[] Target;
     private Rigidbody rigidbody;
@@ -107,7 +108,6 @@ public class Player : MonoBehaviour
             grounded = false;
         }
     }
-
     public void setBlock(string _blockedSide,bool _isBlocked)
     {
         switch(_blockedSide)
