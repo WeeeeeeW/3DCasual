@@ -23,21 +23,21 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
 
 
-            // StartCoroutine(Jump("left"));
+        //    // StartCoroutine(Jump("left"));
 
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 2, transform.position.y, transform.position.z), 5);
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
+        //    transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 2, transform.position.y, transform.position.z), 5);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.D))
+        //{
 
-            // StartCoroutine(Jump("right"));
+        //    // StartCoroutine(Jump("right"));
 
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z - 2), 5);
-        }
+        //    transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z - 2), 5);
+        //}
         if (grounded)
         {
             if (Input.GetKeyDown(KeyCode.A) && !blockedLeft)
