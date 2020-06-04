@@ -25,6 +25,22 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+
+
+        //    // StartCoroutine(Jump("left"));
+
+        //    transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 2, transform.position.y, transform.position.z), 5);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.D))
+        //{
+
+        //    // StartCoroutine(Jump("right"));
+
+        //    transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z - 2), 5);
+        //}
         if (grounded)
         {
             if (Input.GetKeyDown(KeyCode.A) && !blockedLeft)
@@ -36,6 +52,7 @@ public class Player : MonoBehaviour
             {
                 StartCoroutine(Jump("right"));
                 //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z - 2), 5);
+
 
             }
         }
@@ -54,6 +71,35 @@ public class Player : MonoBehaviour
         //    }
         //}
     }
+
+
+    //IEnumerator Jump(string direction)
+    //{
+    //    Vector3 desiredPos;
+    //    switch (direction)
+    //    {
+    //        case "left":
+    //            desiredPos = new Vector3(transform.position.x - 2, transform.position.y, transform.position.z);
+    //            while (Mathf.Abs(transform.position.x - desiredPos.x) > .1f)
+    //            {
+    //                transform.position = Vector3.Lerp(transform.position, desiredPos, 0.2f);
+    //                yield return new WaitForSeconds(.01f);
+    //            }
+    //            break;
+    //        case "right":
+    //            desiredPos = new Vector3(transform.position.x, transform.position.y, transform.position.z - 2);
+    //            while (Mathf.Abs(transform.position.z - desiredPos.z) > .1f)
+    //            {
+    //                transform.position = Vector3.Lerp(transform.position, desiredPos, 0.2f);
+    //                yield return new WaitForSeconds(.01f);
+    //            }
+    //            break;
+    //    }
+       
+    //    yield return null;
+    //}
+
+
     IEnumerator Jump(string direction)
     {
         rigidbody.useGravity = false;
@@ -120,4 +166,5 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
 }
