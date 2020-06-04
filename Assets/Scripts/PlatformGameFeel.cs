@@ -17,7 +17,6 @@ public class PlatformGameFeel : MonoBehaviour
         once = false;
         Vector3 _desiredBouncePos = transform.position - boucestrength;
         Vector3 _originalPos = transform.position;
-        Debug.Log(transform.position.y - _desiredBouncePos.y);
         while (transform.position.y - _desiredBouncePos.y > .01f)
         {
             transform.position = Vector3.Lerp(transform.position, _desiredBouncePos, .7f);
