@@ -154,6 +154,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5feb2a7b0d738634e87b50712b8b1424,
+        type: 3}
+      propertyPath: m_TagString
+      value: Platform
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5feb2a7b0d738634e87b50712b8b1424, type: 3}
 --- !u!1 &8540372323850993439 stripped
@@ -235,6 +240,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterPlatform (5)
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5feb2a7b0d738634e87b50712b8b1424,
+        type: 3}
+      propertyPath: m_TagString
+      value: Platform
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5feb2a7b0d738634e87b50712b8b1424, type: 3}
 --- !u!1 &1155499657849658987 stripped
@@ -260,6 +270,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LavaPlatform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2043966598279874419, guid: 1ddb528ce67d7e848ae9d0cf3ee10735,
+        type: 3}
+      propertyPath: m_TagString
+      value: Platform
       objectReference: {fileID: 0}
     - target: {fileID: 3028381656242894176, guid: 1ddb528ce67d7e848ae9d0cf3ee10735,
         type: 3}
@@ -485,6 +500,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LavaPlatform (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2043966598279874419, guid: 1ddb528ce67d7e848ae9d0cf3ee10735,
+        type: 3}
+      propertyPath: m_TagString
+      value: Platform
       objectReference: {fileID: 0}
     - target: {fileID: 3028381656242894176, guid: 1ddb528ce67d7e848ae9d0cf3ee10735,
         type: 3}
@@ -916,6 +936,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TreePlatform (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3028036051560849235, guid: 87b7405ccef9a5840b47f73185c5f54b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Platform
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87b7405ccef9a5840b47f73185c5f54b, type: 3}
 --- !u!4 &8590903786760990121 stripped
@@ -991,6 +1016,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TreePlatform (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3028036051560849235, guid: 87b7405ccef9a5840b47f73185c5f54b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Platform
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87b7405ccef9a5840b47f73185c5f54b, type: 3}
 --- !u!4 &8590903786955722199 stripped
@@ -1010,6 +1040,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LavaPlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 2043966598279874419, guid: 1ddb528ce67d7e848ae9d0cf3ee10735,
+        type: 3}
+      propertyPath: m_TagString
+      value: Platform
       objectReference: {fileID: 0}
     - target: {fileID: 3028381656242894176, guid: 1ddb528ce67d7e848ae9d0cf3ee10735,
         type: 3}
@@ -1440,6 +1475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaterPlatform (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5feb2a7b0d738634e87b50712b8b1424,
+        type: 3}
+      propertyPath: m_TagString
+      value: Platform
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5feb2a7b0d738634e87b50712b8b1424, type: 3}
