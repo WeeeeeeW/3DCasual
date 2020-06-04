@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         playerSprite = gameObject.transform.GetChild(0).gameObject;
-        landingParticle = gameObject.transform.FindChild("Landing Particle").GetComponent<ParticleSystem>();
+        landingParticle = GameObject.Find("Landing Particle").GetComponent<ParticleSystem>();
     }
 
    
@@ -59,12 +59,12 @@ public class Player : MonoBehaviour
         switch (direction)
         {
             case "left":
-                playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 270, 0);
+                playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
                 Target[0] = GameObject.Find("LeftJump").transform.position;
                 Target[1] = GameObject.Find("LeftLand").transform.position;
                 break;
             case "right":
-                playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+                playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
                 Target[0] = GameObject.Find("RightJump").transform.position;
                 Target[1] = GameObject.Find("RightLand").transform.position;     
                 break;
@@ -89,6 +89,7 @@ public class Player : MonoBehaviour
     {
         if (collision.transform.tag == "Platform")
         {
+            landingParticle.transform.position = collision.GetContact(0).point;
             landingParticle.Play();
         }
     }
