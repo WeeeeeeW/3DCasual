@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     private bool blockedLeft, blockedRight;
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
-    private bool jumping;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,12 +28,12 @@ public class Player : MonoBehaviour
 
         if (grounded)
         {
-            if (Input.GetKeyDown(KeyCode.A) && !blockedLeft && !jumping)
+            if (Input.GetKeyDown(KeyCode.A) && !blockedLeft)
             {
                 StartCoroutine(Jump("left"));
                 //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 2, transform.position.y, transform.position.z), 5);
             }
-            else if (Input.GetKeyDown(KeyCode.D) && !blockedRight  && !jumping)
+            else if (Input.GetKeyDown(KeyCode.D) && !blockedRight)
             {
                 StartCoroutine(Jump("right"));
                 //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z - 2), 5);
@@ -62,9 +61,9 @@ public class Player : MonoBehaviour
 
     IEnumerator Jump(string direction)
     {
-        jumping = true;
         grounded = false;
         rigidbody.useGravity = false;
+        float timer = 0f;
         switch (direction)
         {
             case "left":
@@ -78,20 +77,23 @@ public class Player : MonoBehaviour
                 Target[1] = GameObject.Find("RightLand").transform.position;     
                 break;
         }
-        while (Vector3.Distance(transform.position, Target[0]) > 0.2f)
+        while (timer < .1f)
         {
             playerSprite.gameObject.transform.localScale = Vector3.Lerp(playerSprite.gameObject.transform.localScale, new Vector3(1, .7f, .7f), .4f);
             transform.position = Vector3.Lerp(transform.position, Target[0], 0.35f);
+            timer += Time.deltaTime;
             yield return new WaitForSeconds(.01f);
         }
-        while (Vector3.Distance(transform.position, Target[1]) > 0.2f)
+        timer = 0;
+        while (timer < .15f)
         {
             rigidbody.useGravity = true;
             playerSprite.gameObject.transform.localScale = Vector3.Lerp(playerSprite.gameObject.transform.localScale, new Vector3(1, 1, 1), .4f);
             transform.position = Vector3.Lerp(transform.position, Target[1], 0.35f);
+            timer += Time.deltaTime;
             yield return new WaitForSeconds(.01f);
         }
-        jumping = false;
+        transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
         yield return null;
     }
 
@@ -99,18 +101,11 @@ public class Player : MonoBehaviour
     {
         if (collision.transform.tag == "Platform")
         {
+            StopAllCoroutines();
+            Debug.Log(collision.transform.name);
             grounded = true;
             landingParticle.transform.position = collision.GetContact(0).point;
             landingParticle.Play();
-            transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
-
-        }
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.transform.tag == "Platform")
-        {
-            grounded = true;
         }
     }
     public void setBlock(string _blockedSide,bool _isBlocked)
