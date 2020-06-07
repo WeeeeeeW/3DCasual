@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private bool grounded;
     [SerializeField] private Vector3[] Target;
     private Rigidbody rigidbody;
-    private bool blockedLeft, blockedRight;
+    private bool blockedLeft, blockedRight, jumping;
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
     // Start is called before the first frame update
@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         playerSprite = gameObject.transform.GetChild(0).gameObject;
         landingParticle = GameObject.Find("Landing Particle").GetComponent<ParticleSystem>();
+        jumping = false;
     }
 
    
@@ -28,12 +29,12 @@ public class Player : MonoBehaviour
 
         if (grounded)
         {
-            if (Input.GetKeyDown(KeyCode.A) && !blockedLeft)
+            if (Input.GetKeyDown(KeyCode.A) && !blockedLeft && !jumping)
             {
                 StartCoroutine(Jump("left"));
                 //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 2, transform.position.y, transform.position.z), 5);
             }
-            else if (Input.GetKeyDown(KeyCode.D) && !blockedRight)
+            else if (Input.GetKeyDown(KeyCode.D) && !blockedRight && !jumping)
             {
                 StartCoroutine(Jump("right"));
                 //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z - 2), 5);
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Jump(string direction)
     {
+        jumping = true;
         grounded = false;
         rigidbody.useGravity = false;
         float timer = 0f;
@@ -77,7 +79,7 @@ public class Player : MonoBehaviour
                 Target[1] = GameObject.Find("RightLand").transform.position;     
                 break;
         }
-        while (timer < .1f)
+        while (timer < .05f)
         {
             playerSprite.gameObject.transform.localScale = Vector3.Lerp(playerSprite.gameObject.transform.localScale, new Vector3(1, .7f, .7f), .4f);
             transform.position = Vector3.Lerp(transform.position, Target[0], 0.35f);
@@ -85,7 +87,7 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(.01f);
         }
         timer = 0;
-        while (timer < .15f)
+        while (timer < .1f)
         {
             rigidbody.useGravity = true;
             playerSprite.gameObject.transform.localScale = Vector3.Lerp(playerSprite.gameObject.transform.localScale, new Vector3(1, 1, 1), .4f);
@@ -93,7 +95,12 @@ public class Player : MonoBehaviour
             timer += Time.deltaTime;
             yield return new WaitForSeconds(.01f);
         }
-        transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
+        Vector3 tempPos = transform.position;
+        tempPos.x = Mathf.Round(tempPos.x);
+        tempPos.y = Mathf.Round(tempPos.y);
+        tempPos.z = Mathf.Round(tempPos.z);
+        transform.position = tempPos;
+        jumping = false;
         yield return null;
     }
 
@@ -101,8 +108,6 @@ public class Player : MonoBehaviour
     {
         if (collision.transform.tag == "Platform")
         {
-            StopAllCoroutines();
-            Debug.Log(collision.transform.name);
             grounded = true;
             landingParticle.transform.position = collision.GetContact(0).point;
             landingParticle.Play();
