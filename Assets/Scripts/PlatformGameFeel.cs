@@ -6,6 +6,7 @@ public class PlatformGameFeel : MonoBehaviour
 {
     public Vector3 boucestrength;
     public bool once = true;
+   
     private void OnTriggerEnter(Collider other)
     {
         if (once && other.transform.tag == "Player")

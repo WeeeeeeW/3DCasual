@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
     private bool jumping;
-    // Start is called before the first frame update
+    int step = 0;
+  
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -32,11 +33,15 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.A) && !blockedLeft && !jumping)
             {
                 StartCoroutine(Jump("left"));
+                step++;
+                CheckSpawn();
                 //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 2, transform.position.y, transform.position.z), 5);
             }
             else if (Input.GetKeyDown(KeyCode.D) && !blockedRight  && !jumping)
             {
                 StartCoroutine(Jump("right"));
+                step++;
+                CheckSpawn();
                 //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z - 2), 5);
 
 
@@ -123,6 +128,12 @@ public class Player : MonoBehaviour
             case "right":
                 blockedRight = _isBlocked;
                 break;
+        }
+    }
+    void CheckSpawn(){
+        if (step % 4 == 0)
+        {
+           Manager.instance.SpawnLand();
         }
     }
 
