@@ -16,10 +16,13 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        desiredPosition = player.transform.position + offset;
-        if(desiredPosition.y < transform.position.y)
+        if (player != null)
         {
-            transform.position = Vector3.Lerp(transform.position,new Vector3(desiredPosition.x,desiredPosition.y,desiredPosition.x),0.8f * Time.deltaTime);
+            desiredPosition = player.transform.position + offset;
+            if (desiredPosition.y < transform.position.y)
+            {
+                transform.position = Vector3.Lerp(transform.position, new Vector3(desiredPosition.x, desiredPosition.y, desiredPosition.x), 0.9f * Time.deltaTime);
+            }
         }
     }
 }
