@@ -130,11 +130,13 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
     void CheckSpawn(){
         if (step % 4 == 0)
         {
            Manager.instance.SpawnLand();
         }
     }
+
 
 }
