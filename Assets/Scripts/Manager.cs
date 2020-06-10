@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
+    public static Manager instance { get; private set; }
+
     public List<GameObject> ListPlatforms;
-    public GameObject normalPlatform;
-    public GameObject treePlatform;
-    public GameObject lavaPlatform;
-    public GameObject land_1;
-    public GameObject land_2;
-    public GameObject land_3;
-    public GameObject land_4;
+    public List<int> ListNumber;
+
     public int count = 0;
-    public int countFalling = 0;
+    public int preRandom1 = 1;
+    public int preRandom2 = 2;
+    void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
-      // AddToList();
-       InvokeRepeating("SpawnLand", 1, 0.6f);
+        AddNumber();
+        SpawnLand();
     }
     void Update()
     {
-
-       // PlatformMovement();
-       
+        
     }
     //void AddToList()
     //{
@@ -101,34 +101,109 @@ public class Manager : MonoBehaviour
     //    }
     //}
     void RandomLand(int i)
-    {                             
-        int random = Random.Range(0, 100);
-        if (random < 34)
+    {
+        //int random = Random.Range(0, 6);
+        int random = RandomNumber();
+        if (random == 0)
         {
-            Instantiate(land_1, new Vector3(-4, -8, -4) + new Vector3(i*(-4), i * (-8), i * (-4)), Quaternion.Euler(0, -180, 0));
+          //  Instantiate(land_1, new Vector3(-4, -8, -4) + new Vector3(i*(-4), i * (-8), i * (-4)), Quaternion.Euler(0, -180, 0));
+            GameObject instance = Instantiate(Resources.Load("Land(1)", typeof(GameObject)), new Vector3(-6, -12, -6) + new Vector3(i * (-6), i * (-12), i * (-6)), Quaternion.Euler(0, -180, 0)) as GameObject;
         }
-        else if (random >= 35 && random < 70)
+        else if (random == 1)
         {
-            Instantiate(land_2, new Vector3(-4, -8, -4) + new Vector3(i * (-4), i * (-8), i * (-4)), Quaternion.Euler(0, -180, 0));
+            GameObject instance = Instantiate(Resources.Load("Land(2)", typeof(GameObject)), new Vector3(-6, -12, -6) + new Vector3(i * (-6), i * (-12), i * (-6)), Quaternion.Euler(0, -180, 0)) as GameObject;
+
         }
-        else
+        else if (random == 2)
         {
-            Instantiate(land_3, new Vector3(-4, -8, -4) + new Vector3(i * (-4), i * (-8), i * (-4)), Quaternion.Euler(0, -180, 0));
+            GameObject instance = Instantiate(Resources.Load("Land(3)", typeof(GameObject)), new Vector3(-6, -12, -6) + new Vector3(i * (-6), i * (-12), i * (-6)), Quaternion.Euler(0, -180, 0)) as GameObject;
+
+        }
+        else if (random == 3)
+        {
+            GameObject instance = Instantiate(Resources.Load("Land(4)", typeof(GameObject)), new Vector3(-6, -12, -6) + new Vector3(i * (-6), i * (-12), i * (-6)), Quaternion.Euler(0, -180, 0)) as GameObject;
+
+        }
+        else if (random == 4)
+        {
+            GameObject instance = Instantiate(Resources.Load("Land(5)", typeof(GameObject)), new Vector3(-6, -12, -6) + new Vector3(i * (-6), i * (-12), i * (-6)), Quaternion.Euler(0, -180, 0)) as GameObject;
+
+        } 
+        else if (random == 5)
+        {
+            GameObject instance = Instantiate(Resources.Load("Land(6)", typeof(GameObject)), new Vector3(-6, -12, -6) + new Vector3(i * (-6), i * (-12), i * (-6)), Quaternion.Euler(0, -180, 0)) as GameObject;
+
+        }
+        else if (random == 6)
+        {
+            GameObject instance = Instantiate(Resources.Load("Land(7)", typeof(GameObject)), new Vector3(-6, -12, -6) + new Vector3(i * (-6), i * (-12), i * (-6)), Quaternion.Euler(0, -180, 0)) as GameObject;
+
+        }
+        else if (random == 7)
+        {
+            GameObject instance = Instantiate(Resources.Load("Land(8)", typeof(GameObject)), new Vector3(-6, -12, -6) + new Vector3(i * (-6), i * (-12), i * (-6)), Quaternion.Euler(0, -180, 0)) as GameObject;
+
         }
 
     }
-    void SpawnLand()
+    public void SpawnLand()
     {
         if (count  == 0)
-        {
-            Instantiate(land_1, new Vector3(0,0,0), Quaternion.Euler(0, -180, 0));
-
+        {           
+            GameObject instance = Instantiate(Resources.Load("Land(0)", typeof(GameObject)), new Vector3(0, 0, 0), Quaternion.Euler(0, -180, 0)) as GameObject;
             count++;
         }
         else
         {
             RandomLand(count - 1);
             count++;
+        }
+    }
+    int  RandomNumber()
+    {
+        int random = new int();
+        if (ListNumber.Count == 0 )
+        {
+            AddNumber();
+            random = Random.Range(0, 8);
+            if (ListNumber.Contains(random))
+            {
+              //  Debug.Log(" " + random);
+                ListNumber.Remove(random);
+                //for (int i = 0; i < ListNumber.Count; i++)
+                //{
+                //    Debug.Log(" listNumber : " + ListNumber[i]);
+                //}
+            }
+            else
+            {
+                RandomNumber();
+            }
+        }
+        else
+        {
+            random = Random.Range(0, 8);
+            if (ListNumber.Contains(random))
+            {
+               // Debug.Log(" " + random);
+                ListNumber.Remove(random);
+                //for (int i = 0; i < ListNumber.Count; i++)
+                //{
+                //    Debug.Log(" listNumber : " + ListNumber[i]);
+                //}
+            }
+            else
+            {
+                RandomNumber();
+            }
+        }
+        return random;
+    }
+    void AddNumber()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            ListNumber.Add(i);
         }
     }
 }
