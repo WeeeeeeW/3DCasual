@@ -9,17 +9,22 @@ public class Player : MonoBehaviour
     private bool grounded;
     [SerializeField] private Vector3[] Target;
     private Rigidbody rigidbody;
-    private bool blockedLeft, blockedRight;
+    private bool blockedLeft, blockedRight, jumping;
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
-    private bool jumping;
+
+    private bool isJumping;
     int step = 0;
   
+
+    // Start is called before the first frame update
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         playerSprite = gameObject.transform.GetChild(0).gameObject;
         landingParticle = GameObject.Find("Landing Particle").GetComponent<ParticleSystem>();
+        jumping = false;
     }
 
    
@@ -27,7 +32,10 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        }
         if (grounded)
         {
             if (Input.GetKeyDown(KeyCode.A) && !blockedLeft && !jumping)
@@ -37,7 +45,7 @@ public class Player : MonoBehaviour
                 CheckSpawn();
                 //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 2, transform.position.y, transform.position.z), 5);
             }
-            else if (Input.GetKeyDown(KeyCode.D) && !blockedRight  && !jumping)
+            else if (Input.GetKeyDown(KeyCode.D) && !blockedRight && !jumping)
             {
                 StartCoroutine(Jump("right"));
                 step++;
@@ -70,6 +78,7 @@ public class Player : MonoBehaviour
         jumping = true;
         grounded = false;
         rigidbody.useGravity = false;
+        float timer = 0f;
         switch (direction)
         {
             case "left":
@@ -83,19 +92,27 @@ public class Player : MonoBehaviour
                 Target[1] = GameObject.Find("RightLand").transform.position;     
                 break;
         }
-        while (Vector3.Distance(transform.position, Target[0]) > 0.2f)
+        while (timer < .05f)
         {
             playerSprite.gameObject.transform.localScale = Vector3.Lerp(playerSprite.gameObject.transform.localScale, new Vector3(1, .7f, .7f), .4f);
             transform.position = Vector3.Lerp(transform.position, Target[0], 0.35f);
+            timer += Time.deltaTime;
             yield return new WaitForSeconds(.01f);
         }
-        while (Vector3.Distance(transform.position, Target[1]) > 0.2f)
+        timer = 0;
+        while (timer < .1f)
         {
             rigidbody.useGravity = true;
             playerSprite.gameObject.transform.localScale = Vector3.Lerp(playerSprite.gameObject.transform.localScale, new Vector3(1, 1, 1), .4f);
             transform.position = Vector3.Lerp(transform.position, Target[1], 0.35f);
+            timer += Time.deltaTime;
             yield return new WaitForSeconds(.01f);
         }
+        Vector3 tempPos = transform.position;
+        tempPos.x = Mathf.Round(tempPos.x);
+        tempPos.y = Mathf.Round(tempPos.y);
+        tempPos.z = Mathf.Round(tempPos.z);
+        transform.position = tempPos;
         jumping = false;
         yield return null;
     }
@@ -107,15 +124,6 @@ public class Player : MonoBehaviour
             grounded = true;
             landingParticle.transform.position = collision.GetContact(0).point;
             landingParticle.Play();
-            transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
-
-        }
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.transform.tag == "Platform")
-        {
-            grounded = true;
         }
     }
     public void setBlock(string _blockedSide,bool _isBlocked)
@@ -131,6 +139,7 @@ public class Player : MonoBehaviour
         }
     }
 
+
     void CheckSpawn(){
         if (step % 4 == 0)
         {
@@ -138,5 +147,10 @@ public class Player : MonoBehaviour
         }
     }
 
+
+    void Dead()
+    {
+        Destroy(this.gameObject);
+    }
 
 }

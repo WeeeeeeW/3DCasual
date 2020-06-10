@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformGameFeel : MonoBehaviour
+public class Platform : MonoBehaviour
 {
     public Vector3 boucestrength;
     public bool once = true;
