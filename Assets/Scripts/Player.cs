@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     private bool blockedLeft, blockedRight, jumping;
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
-    private bool jumping;
     int step = 0;
   
     void Start()
