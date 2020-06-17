@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private bool blockedLeft, blockedRight, jumping;
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
+    private Vector3 leftJump, leftLand, rightJump, rightLand;
     int step = 0;
   
     void Start()
@@ -20,6 +21,11 @@ public class Player : MonoBehaviour
         playerSprite = gameObject.transform.GetChild(0).gameObject;
         landingParticle = GameObject.Find("Landing Particle").GetComponent<ParticleSystem>();
         jumping = false;
+
+        leftJump = GameObject.Find("LeftJump").transform.position;
+        leftLand = GameObject.Find("LeftLand").transform.position;
+        rightJump = GameObject.Find("RightJump").transform.position;
+        rightLand = GameObject.Find("RightLand").transform.position;
     }
 
    
@@ -74,13 +80,13 @@ public class Player : MonoBehaviour
         {
             case "left":
                 playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
-                Target[0] = GameObject.Find("LeftJump").transform.position;
-                Target[1] = GameObject.Find("LeftLand").transform.position;
+                Target[0] = leftJump;
+                Target[1] = leftLand;
                 break;
             case "right":
                 playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-                Target[0] = GameObject.Find("RightJump").transform.position;
-                Target[1] = GameObject.Find("RightLand").transform.position;     
+                Target[0] = rightJump;
+                Target[1] = rightLand; 
                 break;
         }
         while (timer < .05f)
@@ -104,6 +110,10 @@ public class Player : MonoBehaviour
         tempPos.y = Mathf.Round(tempPos.y);
         tempPos.z = Mathf.Round(tempPos.z);
         transform.position = tempPos;
+        leftJump = GameObject.Find("LeftJump").transform.position;
+        leftLand = GameObject.Find("LeftLand").transform.position;
+        rightJump = GameObject.Find("RightJump").transform.position;
+        rightLand = GameObject.Find("RightLand").transform.position;
         jumping = false;
         yield return null;
     }
