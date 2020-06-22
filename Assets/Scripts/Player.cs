@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Jump(string direction)
     {
+        Manager.instance.score++;
         jumping = true;
         grounded = false;
         rigidbody.useGravity = false;

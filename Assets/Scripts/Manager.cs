@@ -1,23 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Manager : MonoBehaviour
 {
     public static Manager instance { get; private set; }
 
+
     public List<GameObject> ListPlatforms;
     public List<int> ListNumber;
 
+    public int score;
     public int count = 0;
     public int preRandom1 = 1;
     public int preRandom2 = 2;
+
+    //UI
+    public TextMeshProUGUI UI_Score;
     void Awake()
     {
         instance = this;
     }
     void Start()
     {
+        score = 0;
         AddNumber();
         SpawnLand();
     }
@@ -27,6 +34,7 @@ public class Manager : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
+        UI_Score.text = score.ToString();
     }
     //void AddToList()
     //{
