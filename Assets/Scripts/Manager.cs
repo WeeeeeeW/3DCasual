@@ -18,12 +18,14 @@ public class Manager : MonoBehaviour
 
     //UI
     public TextMeshProUGUI UI_Score;
+    public GameObject PauseMenu;
     void Awake()
     {
         instance = this;
     }
     void Start()
     {
+        Time.timeScale = 1;
         score = 0;
         AddNumber();
         SpawnLand();
@@ -32,7 +34,7 @@ public class Manager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+            Restart();
         }
         UI_Score.text = score.ToString();
     }
@@ -216,5 +218,22 @@ public class Manager : MonoBehaviour
         {
             ListNumber.Add(i);
         }
+    }
+
+
+    //UI Script
+    public void Pause()
+    {
+        PauseMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void Resume()
+    {
+        PauseMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+    public void Restart()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 }
