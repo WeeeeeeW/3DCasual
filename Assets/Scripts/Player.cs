@@ -33,7 +33,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (grounded)
+        Debug.Log("Blocked Left " + blockedLeft);
+        Debug.Log("Blocked Right " + blockedRight);
+        if (grounded && Time.timeScale > 0)
         {
             if (Input.GetKeyDown(KeyCode.A) && !blockedLeft && !jumping)
             {

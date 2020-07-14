@@ -6871,7 +6871,7 @@ PrefabInstance:
     - target: {fileID: 728115335438613109, guid: 6e23b2bb2e6d3e4478cb3d7c153304e4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 728115335438613109, guid: 6e23b2bb2e6d3e4478cb3d7c153304e4,
         type: 3}
@@ -7305,6 +7305,7 @@ GameObject:
   - component: {fileID: 1563002908}
   - component: {fileID: 1563002907}
   - component: {fileID: 1563002906}
+  - component: {fileID: 1563002909}
   m_Layer: 0
   m_Name: Back to Menu
   m_TagString: Untagged
@@ -7321,7 +7322,7 @@ RectTransform:
   m_GameObject: {fileID: 1563002904}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 865259307}
   m_Father: {fileID: 1782174774}
@@ -7413,6 +7414,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563002904}
   m_CullTransparentMesh: 0
+--- !u!114 &1563002909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563002904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993d391d72359b34c9f69b0eb3b91480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1601396585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7993,6 +8006,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1782174774}
   - component: {fileID: 1782174775}
+  - component: {fileID: 1782174776}
   m_Layer: 0
   m_Name: Button Panel
   m_TagString: Untagged
@@ -8047,6 +8061,18 @@ MonoBehaviour:
   m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &1782174776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782174773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993d391d72359b34c9f69b0eb3b91480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1916938925
 GameObject:
   m_ObjectHideFlags: 0
@@ -8124,6 +8150,7 @@ GameObject:
   - component: {fileID: 1942788600}
   - component: {fileID: 1942788599}
   - component: {fileID: 1942788598}
+  - component: {fileID: 1942788601}
   m_Layer: 0
   m_Name: Restart
   m_TagString: Untagged
@@ -8140,7 +8167,7 @@ RectTransform:
   m_GameObject: {fileID: 1942788596}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1413758876}
   m_Father: {fileID: 1782174774}
@@ -8194,15 +8221,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1916938926}
-        m_MethodName: Restart
-        m_Mode: 1
+      - m_Target: {fileID: 1782174776}
+        m_MethodName: OnClose
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Restart
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1942788599
@@ -8243,6 +8270,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942788596}
   m_CullTransparentMesh: 0
+--- !u!114 &1942788601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942788596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993d391d72359b34c9f69b0eb3b91480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1953007247
 GameObject:
   m_ObjectHideFlags: 0
@@ -8485,6 +8524,7 @@ GameObject:
   - component: {fileID: 1967179839}
   - component: {fileID: 1967179838}
   - component: {fileID: 1967179837}
+  - component: {fileID: 1967179840}
   m_Layer: 0
   m_Name: Resume
   m_TagString: Untagged
@@ -8501,7 +8541,7 @@ RectTransform:
   m_GameObject: {fileID: 1967179835}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 620781003}
   m_Father: {fileID: 1782174774}
@@ -8555,15 +8595,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1916938926}
-        m_MethodName: Resume
-        m_Mode: 1
+      - m_Target: {fileID: 1782174776}
+        m_MethodName: OnClose
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Resume
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1967179838
@@ -8604,6 +8644,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967179835}
   m_CullTransparentMesh: 0
+--- !u!114 &1967179840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967179835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 993d391d72359b34c9f69b0eb3b91480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2081926173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8861,7 +8913,7 @@ PrefabInstance:
     - target: {fileID: 7592105628198962027, guid: 1cd403d08b283fd40aeeedfcdb0a5525,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7592105628198962027, guid: 1cd403d08b283fd40aeeedfcdb0a5525,
         type: 3}
@@ -8946,16 +8998,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TreePlatform
-      objectReference: {fileID: 0}
-    - target: {fileID: 3028036051560849235, guid: 87b7405ccef9a5840b47f73185c5f54b,
-        type: 3}
-      propertyPath: m_TagString
-      value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 6423350953084234670, guid: 87b7405ccef9a5840b47f73185c5f54b,
-        type: 3}
-      propertyPath: m_Mass
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87b7405ccef9a5840b47f73185c5f54b, type: 3}

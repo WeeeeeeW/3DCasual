@@ -229,6 +229,7 @@ public class Manager : MonoBehaviour
     }
     public void Resume()
     {
+        float delay = 0;
         PauseMenu.SetActive(false);
         Time.timeScale = 1;
     }
