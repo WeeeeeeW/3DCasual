@@ -13,11 +13,16 @@ public class Player : MonoBehaviour
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
 
+
     private bool isJumping;
     int step = 0;
   
 
     // Start is called before the first frame update
+
+
+    private Vector3 leftJump, leftLand, rightJump, rightLand;
+    int step = 0;
 
     void Start()
     {
@@ -25,6 +30,11 @@ public class Player : MonoBehaviour
         playerSprite = gameObject.transform.GetChild(0).gameObject;
         landingParticle = GameObject.Find("Landing Particle").GetComponent<ParticleSystem>();
         jumping = false;
+
+        leftJump = GameObject.Find("LeftJump").transform.position;
+        leftLand = GameObject.Find("LeftLand").transform.position;
+        rightJump = GameObject.Find("RightJump").transform.position;
+        rightLand = GameObject.Find("RightLand").transform.position;
     }
 
    
@@ -32,11 +42,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
-        }
-        if (grounded)
+        Debug.Log("Blocked Left " + blockedLeft);
+        Debug.Log("Blocked Right " + blockedRight);
+        if (grounded && Time.timeScale > 0)
         {
             if (Input.GetKeyDown(KeyCode.A) && !blockedLeft && !jumping)
             {
@@ -75,6 +83,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Jump(string direction)
     {
+        Manager.instance.score++;
         jumping = true;
         grounded = false;
         rigidbody.useGravity = false;
@@ -83,13 +92,13 @@ public class Player : MonoBehaviour
         {
             case "left":
                 playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
-                Target[0] = GameObject.Find("LeftJump").transform.position;
-                Target[1] = GameObject.Find("LeftLand").transform.position;
+                Target[0] = leftJump;
+                Target[1] = leftLand;
                 break;
             case "right":
                 playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-                Target[0] = GameObject.Find("RightJump").transform.position;
-                Target[1] = GameObject.Find("RightLand").transform.position;     
+                Target[0] = rightJump;
+                Target[1] = rightLand; 
                 break;
         }
         while (timer < .05f)
@@ -113,6 +122,10 @@ public class Player : MonoBehaviour
         tempPos.y = Mathf.Round(tempPos.y);
         tempPos.z = Mathf.Round(tempPos.z);
         transform.position = tempPos;
+        leftJump = GameObject.Find("LeftJump").transform.position;
+        leftLand = GameObject.Find("LeftLand").transform.position;
+        rightJump = GameObject.Find("RightJump").transform.position;
+        rightLand = GameObject.Find("RightLand").transform.position;
         jumping = false;
         yield return null;
     }
@@ -141,8 +154,9 @@ public class Player : MonoBehaviour
 
 
     void CheckSpawn(){
-        if (step % 4 == 0)
+        if (step == 4)
         {
+            step = 0;
            Manager.instance.SpawnLand();
         }
     }

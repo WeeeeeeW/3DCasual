@@ -1,29 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Manager : MonoBehaviour
 {
     public static Manager instance { get; private set; }
 
+
     public List<GameObject> ListPlatforms;
     public List<int> ListNumber;
 
+    public int score;
     public int count = 0;
     public int preRandom1 = 1;
     public int preRandom2 = 2;
+
+    //UI
+    public TextMeshProUGUI UI_Score;
+    public GameObject PauseMenu;
     void Awake()
     {
         instance = this;
     }
     void Start()
     {
+        Time.timeScale = 1;
+        score = 0;
         AddNumber();
         SpawnLand();
     }
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Restart();
+        }
+        UI_Score.text = score.ToString();
     }
     //void AddToList()
     //{
@@ -205,5 +218,23 @@ public class Manager : MonoBehaviour
         {
             ListNumber.Add(i);
         }
+    }
+
+
+    //UI Script
+    public void Pause()
+    {
+        PauseMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void Resume()
+    {
+        float delay = 0;
+        PauseMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+    public void Restart()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 }
