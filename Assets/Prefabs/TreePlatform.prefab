@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3619038890654854031}
   - component: {fileID: 2339596098907917549}
   - component: {fileID: 2418188041030650371}
+  - component: {fileID: 9183991520349614111}
+  - component: {fileID: -6307519405972461527}
   m_Layer: 0
   m_Name: TreePlatform
   m_TagString: Platform
@@ -109,5 +111,35 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 4.037549, z: 2}
-  m_Center: {x: 0, y: 1.0187744, z: 0}
+  m_Size: {x: 1.9, y: 2.9142013, z: 1.9}
+  m_Center: {x: 0, y: 0.5116737, z: 0}
+--- !u!54 &9183991520349614111
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3028036051560849235}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
+--- !u!114 &-6307519405972461527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3028036051560849235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55a4436d52c829f4dbc456683f903c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boucestrength: {x: 0, y: 0.2, z: 0}
+  once: 1

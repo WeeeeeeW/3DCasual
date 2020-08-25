@@ -6,13 +6,40 @@ public class Platform : MonoBehaviour
 {
     public Vector3 boucestrength;
     public bool once = true;
-   
+
+    private void Update()
+    {
+        //if (gameObject.transform.position.y == (12 - 2 * (Manager.instance.score - 2)) || gameObject.transform.position.y >= (12 - 2 * (Manager.instance.score - 2) - 0.2))
+        //{
+        //    if (transform.childCount > 0)
+        //    {
+        //        gameObject.transform.GetChild(0).GetComponent<Star>().isFalling = true;
+        //        gameObject.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
+        //        gameObject.transform.GetChild(0).GetComponent<Rigidbody>().useGravity = true;
+        //    }
+        //    gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        //    gameObject.GetComponent<Rigidbody>().useGravity = true;           
+        //}      
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (once && other.transform.tag == "Player")
-            StartCoroutine(platformbouce());
+            StartCoroutine(platformbouce());      
     }
-
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Trigger")
+        {
+            if (transform.childCount > 0)
+            {
+                gameObject.transform.GetChild(0).GetComponent<Star>().isFalling = true;
+                gameObject.transform.GetChild(0).GetComponent<Rigidbody>().isKinematic = false;
+                gameObject.transform.GetChild(0).GetComponent<Rigidbody>().useGravity = true;
+            }
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
+        }
+    }
     IEnumerator platformbouce()
     {
         once = false;

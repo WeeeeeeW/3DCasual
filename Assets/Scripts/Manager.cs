@@ -7,7 +7,6 @@ public class Manager : MonoBehaviour
 {
     public static Manager instance { get; private set; }
 
-
     public List<GameObject> ListPlatforms;
     public List<int> ListNumber;
 

@@ -5,32 +5,34 @@ using UnityEditor;
 
 public class Player : MonoBehaviour
 {
+    public static Player _instance { get; private set; }
     [SerializeField]
     private bool grounded;
     [SerializeField] private Vector3[] Target;
     private Rigidbody rigidbody;
-    private bool blockedLeft, blockedRight, jumping;
+    private bool blockedLeft, blockedRight;
+    public bool jumping;
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
 
-
     private bool isJumping;
     int step = 0;
-  
 
-    // Start is called before the first frame update
-
+    public bool startgame;
 
     private Vector3 leftJump, leftLand, rightJump, rightLand;
-    int step = 0;
-
+    //int step = 0;
+    void Awake()
+    {       
+        _instance = this;
+    }
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         playerSprite = gameObject.transform.GetChild(0).gameObject;
         landingParticle = GameObject.Find("Landing Particle").GetComponent<ParticleSystem>();
         jumping = false;
-
+        startgame = false;
         leftJump = GameObject.Find("LeftJump").transform.position;
         leftLand = GameObject.Find("LeftLand").transform.position;
         rightJump = GameObject.Find("RightJump").transform.position;
@@ -42,12 +44,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Blocked Left " + blockedLeft);
-        Debug.Log("Blocked Right " + blockedRight);
+       // Debug.Log("Blocked Left " + blockedLeft);
+       // Debug.Log("Blocked Right " + blockedRight);
         if (grounded && Time.timeScale > 0)
         {
             if (Input.GetKeyDown(KeyCode.A) && !blockedLeft && !jumping)
             {
+                startgame = true;
                 StartCoroutine(Jump("left"));
                 step++;
                 CheckSpawn();
@@ -55,6 +58,7 @@ public class Player : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.D) && !blockedRight && !jumping)
             {
+                startgame = true;
                 StartCoroutine(Jump("right"));
                 step++;
                 CheckSpawn();
