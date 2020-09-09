@@ -16,17 +16,23 @@ public class Player : MonoBehaviour
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
 
+
     public bool jumping;
+
+    private Vector3 leftJump, leftLand, rightJump, rightLand;
+
     int step = 0;
 
     public bool startgame;
 
-    private Vector3 leftJump, leftLand, rightJump, rightLand;
+
+    //private Vector3 leftJump, leftLand, rightJump, rightLand;
     //int step = 0;
     void Awake()
     {       
         _instance = this;
     }
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
