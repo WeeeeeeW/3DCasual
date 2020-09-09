@@ -14,7 +14,10 @@ public class Player : MonoBehaviour
     private ParticleSystem landingParticle;
     private Vector3 leftJump, leftLand, rightJump, rightLand;
     int step = 0;
-  
+
+    // Start is called before the first frame update
+
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -142,6 +145,8 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
+
     void CheckSpawn(){
         if (step == 4)
         {
@@ -150,8 +155,10 @@ public class Player : MonoBehaviour
         }
     }
 
+
     void Dead()
     {
         Destroy(this.gameObject);
     }
+
 }
