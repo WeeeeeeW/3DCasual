@@ -10,12 +10,13 @@ public class Player : MonoBehaviour
     private bool grounded;
     [SerializeField] private Vector3[] Target;
     private Rigidbody rigidbody;
+    [SerializeField]
     private bool blockedLeft, blockedRight;
-    public bool jumping;
+
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
 
-    private bool isJumping;
+    public bool jumping;
     int step = 0;
 
     public bool startgame;
@@ -109,8 +110,8 @@ public class Player : MonoBehaviour
         {
             playerSprite.gameObject.transform.localScale = Vector3.Lerp(playerSprite.gameObject.transform.localScale, new Vector3(1, .7f, .7f), .4f);
             transform.position = Vector3.Lerp(transform.position, Target[0], 0.35f);
-            timer += Time.deltaTime;
-            yield return new WaitForSeconds(.01f);
+            timer += Time.smoothDeltaTime;
+            yield return new WaitForSecondsRealtime(.01f);
         }
         timer = 0;
         while (timer < .1f)
@@ -118,14 +119,15 @@ public class Player : MonoBehaviour
             rigidbody.useGravity = true;
             playerSprite.gameObject.transform.localScale = Vector3.Lerp(playerSprite.gameObject.transform.localScale, new Vector3(1, 1, 1), .4f);
             transform.position = Vector3.Lerp(transform.position, Target[1], 0.35f);
-            timer += Time.deltaTime;
-            yield return new WaitForSeconds(.01f);
+            timer += Time.smoothDeltaTime;
+            yield return new WaitForSecondsRealtime(.01f);
         }
         Vector3 tempPos = transform.position;
         tempPos.x = Mathf.Round(tempPos.x);
         tempPos.y = Mathf.Round(tempPos.y);
         tempPos.z = Mathf.Round(tempPos.z);
         transform.position = tempPos;
+        Debug.Log(transform.position);
         leftJump = GameObject.Find("LeftJump").transform.position;
         leftLand = GameObject.Find("LeftLand").transform.position;
         rightJump = GameObject.Find("RightJump").transform.position;

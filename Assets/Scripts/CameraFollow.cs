@@ -14,7 +14,7 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        speed = 2;
+        speed = 1f;
     }
 
     // Update is called once per frame

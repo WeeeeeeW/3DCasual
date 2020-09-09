@@ -24,12 +24,13 @@ public class Platform : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (once && other.transform.tag == "Player")
-            StartCoroutine(platformbouce());      
+            StartCoroutine(platformbouce());
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Trigger")
         {
+
             if (transform.childCount > 0)
             {
                 gameObject.transform.GetChild(0).GetComponent<Star>().isFalling = true;
@@ -56,4 +57,5 @@ public class Platform : MonoBehaviour
             yield return new WaitForSeconds(.01f);
         }
     }
+  
 }
