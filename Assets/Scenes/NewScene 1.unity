@@ -6836,7 +6836,7 @@ PrefabInstance:
     - target: {fileID: 728115335438613109, guid: 6e23b2bb2e6d3e4478cb3d7c153304e4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6
+      value: 6.18
       objectReference: {fileID: 0}
     - target: {fileID: 728115335438613109, guid: 6e23b2bb2e6d3e4478cb3d7c153304e4,
         type: 3}
@@ -6897,6 +6897,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5719709810334478397, guid: 6e23b2bb2e6d3e4478cb3d7c153304e4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5719709811506833633, guid: 6e23b2bb2e6d3e4478cb3d7c153304e4,
         type: 3}
@@ -8122,6 +8127,7 @@ MonoBehaviour:
   count: 0
   preRandom1: 1
   preRandom2: 2
+  waterSliderTimer: 0.3
   UI_Score: {fileID: 1733431998}
   PauseMenu: {fileID: 755476513}
 --- !u!4 &1916938927

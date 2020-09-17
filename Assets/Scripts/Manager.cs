@@ -15,6 +15,7 @@ public class Manager : MonoBehaviour
     public int count = 0;
     public int preRandom1 = 1;
     public int preRandom2 = 2;
+    public float waterSliderTimer;
 
     //UI
     public TextMeshProUGUI UI_Score;

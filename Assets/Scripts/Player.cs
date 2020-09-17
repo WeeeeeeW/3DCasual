@@ -136,11 +136,13 @@ public class Player : MonoBehaviour
     float waterTimer = 0;
     private void OnCollisionStay(Collision collision)
     {
-        waterTimer += Time.deltaTime;
-        Debug.Log(collision.transform.rotation.y);
-        if (collision.transform.name.Contains("Water") && waterTimer > 0.15f)
+        if(waterTimer < Manager.instance.waterSliderTimer)
+            waterTimer += Time.deltaTime;
+        if (collision.transform.name.Contains("Water") && waterTimer >= Manager.instance.waterSliderTimer)
         {
-            switch(collision.transform.rotation.y)
+            step++;
+            CheckSpawn();
+            switch (collision.transform.rotation.y)
             {
                 case -1f:
                     StartCoroutine(waterSlide("right"));
@@ -173,7 +175,7 @@ public class Player : MonoBehaviour
         }
         while (slideTimer < .05f)
         {
-            transform.position = Vector3.Lerp(transform.position,new Vector3(Target[0].x,transform.position.y,transform.position.z), 0.35f);
+            transform.position = Vector3.Lerp(transform.position,new Vector3(Target[0].x,transform.position.y, Target[0].z), 0.35f);
             slideTimer += Time.deltaTime;
             yield return new WaitForSeconds(.01f);
         }
@@ -181,7 +183,7 @@ public class Player : MonoBehaviour
         while (slideTimer < .1f)
         {
             rigidbody.useGravity = true;
-            transform.position = Vector3.Lerp(transform.position, new Vector3(Target[0].x, transform.position.y, transform.position.z), 0.35f);
+            transform.position = Vector3.Lerp(transform.position, Target[1], 0.35f);
             slideTimer += Time.deltaTime;
             yield return new WaitForSeconds(.01f);
         }
