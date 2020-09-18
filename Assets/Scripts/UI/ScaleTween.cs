@@ -21,6 +21,9 @@ public class ScaleTween : MonoBehaviour
             case "Restart":
                 LeanTween.scale(gameObject, new Vector3(0, 0, 0), .1f).setIgnoreTimeScale(true).setOnComplete(Restart);
                 break;
+            case "Play":
+                LeanTween.scale(gameObject, new Vector3(0, 0, 0), .1f).setIgnoreTimeScale(true).setOnComplete(Play);
+                break;
         }
     }
 
@@ -31,5 +34,9 @@ public class ScaleTween : MonoBehaviour
     void Restart()
     {
         Manager.instance.Restart();
+    }
+    void Play()
+    {
+        Manager.instance.Play();
     }
 }
