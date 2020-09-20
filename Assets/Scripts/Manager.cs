@@ -14,20 +14,21 @@ public class Manager : MonoBehaviour
     public int count = 0;
     public int preRandom1 = 1;
     public int preRandom2 = 2;
+    public float waterSliderTimer;
 
     //UI
     public TextMeshProUGUI UI_Score;
-    public GameObject PauseMenu;
+    public GameObject UI_PauseMenu,UI_MainMenu,UI_ScoreCounter;
     void Awake()
     {
         instance = this;
     }
     void Start()
     {
-        Time.timeScale = 1;
         score = 0;
         AddNumber();
         SpawnLand();
+        Time.timeScale = 0;
     }
     void Update()
     {
@@ -223,17 +224,24 @@ public class Manager : MonoBehaviour
     //UI Script
     public void Pause()
     {
-        PauseMenu.SetActive(true);
+        UI_PauseMenu.SetActive(true);
         Time.timeScale = 0;
     }
     public void Resume()
     {
         float delay = 0;
-        PauseMenu.SetActive(false);
+        UI_PauseMenu.SetActive(false);
         Time.timeScale = 1;
     }
     public void Restart()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
+    public void Play()
+    {
+        Time.timeScale = 1;
+        Debug.Log("play");
+        UI_MainMenu.SetActive(false);
+        UI_ScoreCounter.SetActive(true);
     }
 }

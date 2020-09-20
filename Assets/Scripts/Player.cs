@@ -10,8 +10,12 @@ public class Player : MonoBehaviour
     private bool grounded;
     [SerializeField] private Vector3[] Target;
     private Rigidbody rigidbody;
+
     [SerializeField]
-    private bool blockedLeft, blockedRight;
+   // private bool blockedLeft, blockedRight;
+
+
+    private bool blockedLeft, blockedRight, isJumping,isSliding;
 
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
@@ -38,8 +42,13 @@ public class Player : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         playerSprite = gameObject.transform.GetChild(0).gameObject;
         landingParticle = GameObject.Find("Landing Particle").GetComponent<ParticleSystem>();
+
         jumping = false;
         startgame = false;
+
+        isJumping = false;
+        isSliding = false;
+
         leftJump = GameObject.Find("LeftJump").transform.position;
         leftLand = GameObject.Find("LeftLand").transform.position;
         rightJump = GameObject.Find("RightJump").transform.position;
@@ -51,11 +60,13 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
        // Debug.Log("Blocked Left " + blockedLeft);
        // Debug.Log("Blocked Right " + blockedRight);
+
         if (grounded && Time.timeScale > 0)
         {
-            if (Input.GetKeyDown(KeyCode.A) && !blockedLeft && !jumping)
+            if (Input.GetKeyDown(KeyCode.A) && !blockedLeft && !isJumping && !isSliding)
             {
                 startgame = true;
                 StartCoroutine(Jump("left"));
@@ -63,7 +74,7 @@ public class Player : MonoBehaviour
                 CheckSpawn();
                 //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 2, transform.position.y, transform.position.z), 5);
             }
-            else if (Input.GetKeyDown(KeyCode.D) && !blockedRight && !jumping)
+            else if (Input.GetKeyDown(KeyCode.D) && !blockedRight && !isJumping && !isSliding)
             {
                 startgame = true;
                 StartCoroutine(Jump("right"));
@@ -95,7 +106,7 @@ public class Player : MonoBehaviour
     IEnumerator Jump(string direction)
     {
         Manager.instance.score++;
-        jumping = true;
+        isJumping = true;
         grounded = false;
         rigidbody.useGravity = false;
         float timer = 0f;
@@ -138,18 +149,86 @@ public class Player : MonoBehaviour
         leftLand = GameObject.Find("LeftLand").transform.position;
         rightJump = GameObject.Find("RightJump").transform.position;
         rightLand = GameObject.Find("RightLand").transform.position;
-        jumping = false;
+        isJumping = false;
         yield return null;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        waterTimer = 0;
         if (collision.transform.tag == "Platform")
         {
             grounded = true;
             landingParticle.transform.position = collision.GetContact(0).point;
             landingParticle.Play();
         }
+    }
+    float waterTimer = 0;
+    private void OnCollisionStay(Collision collision)
+    {
+        if(waterTimer < Manager.instance.waterSliderTimer)
+            waterTimer += Time.deltaTime;
+        if (collision.transform.name.Contains("Water") && waterTimer >= Manager.instance.waterSliderTimer)
+        {
+            step++;
+            CheckSpawn();
+            switch (collision.transform.rotation.y)
+            {
+                case -1f:
+                    StartCoroutine(waterSlide("right"));
+                    break;
+                default:
+                    StartCoroutine(waterSlide("left"));
+                    break; 
+            }
+        }
+    }
+
+    IEnumerator waterSlide(string direction)
+    {
+        isSliding = true;
+        grounded = false;
+        rigidbody.useGravity = false;
+        float slideTimer = 0f;
+        switch (direction)
+        {
+            case "left":
+                playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 90, 0);
+                Target[0] = leftJump;
+                Target[1] = leftLand;
+                break;
+            case "right":
+                playerSprite.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                Target[0] = rightJump;
+                Target[1] = rightLand;
+                break;
+        }
+        while (slideTimer < .05f)
+        {
+            transform.position = Vector3.Lerp(transform.position,new Vector3(Target[0].x,transform.position.y, Target[0].z), 0.35f);
+            slideTimer += Time.deltaTime;
+            yield return new WaitForSeconds(.01f);
+        }
+        slideTimer = 0;
+        while (slideTimer < .1f)
+        {
+            rigidbody.useGravity = true;
+            transform.position = Vector3.Lerp(transform.position, Target[1], 0.35f);
+            slideTimer += Time.deltaTime;
+            yield return new WaitForSeconds(.01f);
+        }
+        Vector3 tempPos = transform.position;
+        tempPos.x = Mathf.Round(tempPos.x);
+        tempPos.y = Mathf.Round(tempPos.y);
+        tempPos.z = Mathf.Round(tempPos.z);
+        transform.position = tempPos;
+        leftJump = GameObject.Find("LeftJump").transform.position;
+        leftLand = GameObject.Find("LeftLand").transform.position;
+        rightJump = GameObject.Find("RightJump").transform.position;
+        rightLand = GameObject.Find("RightLand").transform.position;
+        isSliding = false;
+        yield return null;
+
     }
     public void setBlock(string _blockedSide,bool _isBlocked)
     {
@@ -162,6 +241,7 @@ public class Player : MonoBehaviour
                 blockedRight = _isBlocked;
                 break;
         }
+
     }
 
 
