@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5795942647043546849}
   - component: {fileID: 1267170306054349828}
   - component: {fileID: 7909071574568571307}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: QuickSandBroken
   m_TagString: Platform
   m_Icon: {fileID: 0}

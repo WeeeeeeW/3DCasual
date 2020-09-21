@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2418188041030650371}
   - component: {fileID: 9183991520349614111}
   - component: {fileID: -6307519405972461527}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TreePlatform
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 0.5116737, z: 0}
+  m_Center: {x: 0, y: 0.98, z: 0}
 --- !u!54 &9183991520349614111
 Rigidbody:
   m_ObjectHideFlags: 0

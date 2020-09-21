@@ -14,7 +14,8 @@ public class CameraFollow : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        speed = 1f;
+        speed = 2f;
+        Debug.Log(Screen.height);
     }
 
     // Update is called once per frame
@@ -23,16 +24,17 @@ public class CameraFollow : MonoBehaviour
         if (player != null && Player._instance.startgame == true)
         {
             transform.Translate(-transform.up * Time.deltaTime * speed, Space.World);
-            if (Player._instance.jumping == true)
+            Vector3 tmpPos = Camera.main.WorldToScreenPoint(player.transform.position);
+            // Debug.Log(tmpPos.y);
+            if (tmpPos.y < Screen.height / 2)
             {
+                // Debug.Log("a");  
                 desiredPosition = player.transform.position + offset;
                 if (desiredPosition.y < transform.position.y)
                 {
-                    transform.position = Vector3.Lerp(transform.position, new Vector3(desiredPosition.x, desiredPosition.y, desiredPosition.x), 1f * Time.deltaTime);
+                    transform.position = Vector3.Lerp(transform.position, new Vector3(desiredPosition.x, desiredPosition.y, desiredPosition.x), 2f * Time.deltaTime);
                 }
-
-            }
-        }      
-       
+            }        
+        }
     }
 }

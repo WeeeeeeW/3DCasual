@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3121445675230920349}
   - component: {fileID: -2513208691130933941}
   - component: {fileID: 4147998058640590103}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: QuickSand
   m_TagString: Platform
   m_Icon: {fileID: 0}

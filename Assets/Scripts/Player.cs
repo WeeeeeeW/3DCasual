@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
    // private bool blockedLeft, blockedRight;
 
 
-    private bool blockedLeft, blockedRight, isJumping,isSliding;
-
+    private bool blockedLeft, blockedRight,isSliding;
+    public bool isJumping;
     private GameObject playerSprite;
     private ParticleSystem landingParticle;
 
@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
         //        Debug.Log("right");
         //    }
         //}
+
     }
 
 
@@ -144,7 +145,7 @@ public class Player : MonoBehaviour
         tempPos.y = Mathf.Round(tempPos.y);
         tempPos.z = Mathf.Round(tempPos.z);
         transform.position = tempPos;
-        Debug.Log(transform.position);
+        //Debug.Log(transform.position);
         leftJump = GameObject.Find("LeftJump").transform.position;
         leftLand = GameObject.Find("LeftLand").transform.position;
         rightJump = GameObject.Find("RightJump").transform.position;
@@ -161,6 +162,10 @@ public class Player : MonoBehaviour
             grounded = true;
             landingParticle.transform.position = collision.GetContact(0).point;
             landingParticle.Play();
+        }
+        if (collision.transform.name.Contains("QuickSandBroken"))
+        {          
+            StartCoroutine("Destroy");
         }
     }
     float waterTimer = 0;
@@ -203,14 +208,14 @@ public class Player : MonoBehaviour
                 Target[1] = rightLand;
                 break;
         }
-        while (slideTimer < .05f)
+        while (slideTimer < .1f)
         {
             transform.position = Vector3.Lerp(transform.position,new Vector3(Target[0].x,transform.position.y, Target[0].z), 0.35f);
             slideTimer += Time.deltaTime;
             yield return new WaitForSeconds(.01f);
         }
         slideTimer = 0;
-        while (slideTimer < .1f)
+        while (slideTimer < .15f)
         {
             rigidbody.useGravity = true;
             transform.position = Vector3.Lerp(transform.position, Target[1], 0.35f);
@@ -258,5 +263,9 @@ public class Player : MonoBehaviour
     {
         Destroy(this.gameObject);
     }
-
+    private IEnumerator Destroy()
+    {
+        yield return new WaitForSeconds(1.5f);
+        Dead();
+    }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8153679162252765685}
   - component: {fileID: -4475031720359982881}
   - component: {fileID: 6609428331782340694}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LavaPlatform
   m_TagString: Platform
   m_Icon: {fileID: 0}

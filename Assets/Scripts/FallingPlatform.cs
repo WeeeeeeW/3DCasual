@@ -46,17 +46,24 @@ public class FallingPlatform : MonoBehaviour
             //{
             //   StartCoroutine("Falling");
             //}
-            StartCoroutine("Falling");
+
+            //StartCoroutine("Falling");
+            Invoke("PlatformFalling",0.1f);
         }
         //{           
         //    gameObject.GetComponent<Rigidbody>().useGravity = true;
         //}
     }
-    private IEnumerator Falling()
+    //private IEnumerator Falling()
+    //{
+    //    yield return new WaitForSeconds(0.5f);
+    //    gameObject.GetComponent<Rigidbody>().isKinematic = false;
+    //    gameObject.GetComponent<Rigidbody>().useGravity = true;
+
+    //}
+    void PlatformFalling()
     {
-        yield return new WaitForSeconds(0.5f);
         gameObject.GetComponent<Rigidbody>().isKinematic = false;
         gameObject.GetComponent<Rigidbody>().useGravity = true;
-
     }
 }
