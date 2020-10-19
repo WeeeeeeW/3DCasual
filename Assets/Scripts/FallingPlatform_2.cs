@@ -24,9 +24,10 @@ public class FallingPlatform_2 : MonoBehaviour
         {
             player.isJumping = true;
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
-            gameObject.GetComponent<Rigidbody>().useGravity = true;           
-           // collision.transform.SendMessage("Dead");
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
+            // collision.transform.SendMessage("Dead");
             //StartCoroutine("Dead");
+          
         }
     }
     private IEnumerator Dead()

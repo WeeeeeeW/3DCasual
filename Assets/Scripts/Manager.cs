@@ -10,25 +10,32 @@ public class Manager : MonoBehaviour
     public List<GameObject> ListPlatforms;
     public List<int> ListNumber;
 
+    public int starQuantity;
+    public int bestScore;
     public int score;
     public int count = 0;
     public int preRandom1 = 1;
     public int preRandom2 = 2;
     public float waterSliderTimer;
+    public bool endGame;
 
     //UI
-    public TextMeshProUGUI UI_Score;
+    public TextMeshProUGUI UI_Score, UI_BestScore, UI_YourScore, UI_StarQuantity;
     public GameObject UI_PauseMenu,UI_MainMenu,UI_ScoreCounter;
+    public GameObject UI_LuckyWheel;
     void Awake()
     {
         instance = this;
     }
     void Start()
     {
-        score = 0;
+        //starQuantity = 0;
+        //bestScore = 0;
+        //score = 0;
         AddNumber();
         SpawnLand();
         Time.timeScale = 0;
+        endGame = false;
     }
     void Update()
     {
@@ -36,7 +43,10 @@ public class Manager : MonoBehaviour
         {
             Restart();
         }
+        UI_StarQuantity.text = starQuantity.ToString();
         UI_Score.text = score.ToString();
+        UI_YourScore.text = score.ToString();
+        UI_BestScore.text = "BEST  " + bestScore.ToString();
     }
     //void AddToList()
     //{
@@ -236,12 +246,26 @@ public class Manager : MonoBehaviour
     public void Restart()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        score = 0;
     }
     public void Play()
     {
         Time.timeScale = 1;
-        Debug.Log("play");
+        //Debug.Log("play");
         UI_MainMenu.SetActive(false);
         UI_ScoreCounter.SetActive(true);
+        if (endGame)
+        {
+            Restart();
+            endGame = false;
+        }
+    }
+    public void ButtonLuckyWheel()
+    {
+        UI_LuckyWheel.SetActive(true);
+    }
+    public void ButtonEscapeLuckyWheel()
+    {
+        UI_LuckyWheel.SetActive(false);
     }
 }

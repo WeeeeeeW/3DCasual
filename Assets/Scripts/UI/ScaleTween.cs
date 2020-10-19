@@ -29,14 +29,17 @@ public class ScaleTween : MonoBehaviour
 
     void Resume()
     {
+        AnalyticsManager.instance.LogEvent("ResumeGame", 1);
         Manager.instance.Resume();
     }
     void Restart()
     {
+        AnalyticsManager.instance.LogEvent("RestatGame", 1);
         Manager.instance.Restart();
     }
     void Play()
     {
+        AnalyticsManager.instance.LogEvent("StatGame", 1);
         Manager.instance.Play();
     }
 }

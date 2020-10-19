@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Collections;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
@@ -12,9 +15,9 @@ public class Player : MonoBehaviour
     private Rigidbody rigidbody;
 
     [SerializeField]
-   // private bool blockedLeft, blockedRight;
+    // private bool blockedLeft, blockedRight;
 
-
+    public bool touchFlag = true;
     private bool blockedLeft, blockedRight,isSliding;
     public bool isJumping;
     private GameObject playerSprite;
@@ -61,8 +64,8 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-       // Debug.Log("Blocked Left " + blockedLeft);
-       // Debug.Log("Blocked Right " + blockedRight);
+        // Debug.Log("Blocked Left " + blockedLeft);
+        // Debug.Log("Blocked Right " + blockedRight);
 
         if (grounded && Time.timeScale > 0)
         {
@@ -88,15 +91,23 @@ public class Player : MonoBehaviour
         //if (Input.touchCount == 1)
         //{
         //    var touch = Input.touches[0];
-        //    if (touch.position.x < Screen.width / 2)
+        //    if (touch.position.x < Screen.width / 2 && !blockedLeft && !isJumping && !isSliding)
         //    {
-        //        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 2, transform.position.y, transform.position.z), 5);
-        //        Debug.Log("left");
+        //        startgame = true;
+        //        StartCoroutine(Jump("left"));
+        //        step++;
+        //        CheckSpawn();
+        //       // transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x - 2, transform.position.y, transform.position.z), 5);
+        //       // Debug.Log("left");
         //    }
-        //    else if (touch.position.x > Screen.width / 2)
+        //    else if (touch.position.x > Screen.width / 2 && !blockedRight && !isJumping && !isSliding)
         //    {
-        //        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z - 2), 5);
-        //        Debug.Log("right");
+        //        startgame = true;
+        //        StartCoroutine(Jump("right"));
+        //        step++;
+        //        CheckSpawn();
+        //        //transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, transform.position.z - 2), 5);
+        //       // Debug.Log("right");
         //    }
         //}
 
@@ -164,7 +175,8 @@ public class Player : MonoBehaviour
             landingParticle.Play();
         }
         if (collision.transform.name.Contains("QuickSandBroken"))
-        {          
+        {
+            AnalyticsManager.instance.LogEvent("Dead_In_QuickSandBroken", 1);
             StartCoroutine("Destroy");
         }
     }
@@ -258,10 +270,17 @@ public class Player : MonoBehaviour
         }
     }
 
-
     void Dead()
-    {
+    {   
+        if (Manager.instance.score > Manager.instance.bestScore)
+        {
+            Manager.instance.bestScore = Manager.instance.score;
+        }
+        Manager.instance.endGame = true;
+        Manager.instance.UI_MainMenu.SetActive(true);
+        Manager.instance.UI_ScoreCounter.SetActive(false);
         Destroy(this.gameObject);
+        JSonData._instance.SaveData();
     }
     private IEnumerator Destroy()
     {

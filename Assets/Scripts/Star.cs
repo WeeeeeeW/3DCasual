@@ -30,7 +30,7 @@ public class Star : MonoBehaviour
     {
         if (other.transform.tag == "Player")
         {
-           // Debug.Log("player");
+            Manager.instance.starQuantity++;
             gameObject.SetActive(false);
             //Destroy(this);
         }

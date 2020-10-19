@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "268612877187",
+    "firebase_url": "https://dcasual-daaac.firebaseio.com",
+    "project_id": "dcasual-daaac",
+    "storage_bucket": "dcasual-daaac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268612877187:android:335a19c09eb7021a9114b6",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.Casual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268612877187-82lkft1qchpqgjq9rqj14cub45dirahc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD0zbk-6Kkrasb7JCfq7OfWpIOyxxxa7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268612877187-82lkft1qchpqgjq9rqj14cub45dirahc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

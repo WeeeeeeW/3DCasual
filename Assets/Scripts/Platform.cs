@@ -8,10 +8,12 @@ public class Platform : MonoBehaviour
     public bool once = true;
     Vector3 currentPos;
     Vector3 targetPos;
+    public float timerCountDown = 2f;
+    bool isPlayerColliding = false;
     private void Start()
     {
         currentPos = transform.position;  
-        targetPos = transform.position + new Vector3(0,-4,0);      
+        targetPos = transform.position + new Vector3(0, -20, 0);      
     }
     private void Update()
     {    
@@ -29,14 +31,59 @@ public class Platform : MonoBehaviour
         //    }
         //    gameObject.GetComponent<Rigidbody>().isKinematic = false;
         //    gameObject.GetComponent<Rigidbody>().useGravity = true;           
-        //}      
+        //} 
+        // Collision timer
+        if (isPlayerColliding == true)
+        {
+            timerCountDown -= Time.deltaTime;
+            if (timerCountDown < 0)
+            {
+                timerCountDown = 0;
+            }
+        }
+
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Player")
-        {                   
-           Invoke("PlatformFalling", 0.8f); 
+        if (Player._instance.startgame)
+        {
+            if (collision.transform.tag == "Player")
+            {
+                Invoke("PlatformFalling", 0.8f);
+            }
+
+            if (collision.gameObject.tag == "Player")
+            {
+                // Debug.Log("Player Entered");
+                isPlayerColliding = true;
+            }
+        }        
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (Player._instance.startgame)
+        {
+            if (collision.gameObject.tag == "Player" && isPlayerColliding == true)
+            {
+                // Debug.Log("Player Stayed");
+                if (timerCountDown <= 0)
+                {
+                    collision.transform.SendMessage("Dead");
+                }
+            }
+        }           
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (Player._instance.startgame)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                //Debug.Log("Player Exited");
+                isPlayerColliding = false;
+            }
         }
+           
     }
     private void OnTriggerEnter(Collider other)
     {

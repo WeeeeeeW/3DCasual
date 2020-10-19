@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         speed = 2f;
-        Debug.Log(Screen.height);
+       // Debug.Log(Screen.height);
     }
 
     // Update is called once per frame

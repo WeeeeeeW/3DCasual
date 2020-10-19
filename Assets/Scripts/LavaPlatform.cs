@@ -19,6 +19,8 @@ public class LavaPlatform : Platform
     {
         if(collision.transform.tag == "Player")
         {
+            Debug.Log("Lava");
+            AnalyticsManager.instance.LogEvent("Dead_In_Lava", 1);
             collision.transform.SendMessage("Dead");
         }
     }
