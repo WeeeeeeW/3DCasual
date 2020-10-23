@@ -41,7 +41,6 @@ public class Platform : MonoBehaviour
                 timerCountDown = 0;
             }
         }
-
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -87,8 +86,8 @@ public class Platform : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (once && other.transform.tag == "Player")
-            StartCoroutine(platformbouce());
+        //if (once && other.transform.tag == "Player")
+        //    StartCoroutine(platformbouce());
     }
     //private void OnTriggerExit(Collider other)
     //{

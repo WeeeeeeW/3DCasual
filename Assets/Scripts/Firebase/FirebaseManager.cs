@@ -7,21 +7,17 @@ using Firebase.Extensions;
 
 public class FirebaseManager : MonoBehaviour
 {
-
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Firebase");
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
             FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
             var dependencyStatus = task.Result;
             if (dependencyStatus == Firebase.DependencyStatus.Available)
             {
-                Debug.Log("working");
                 // Create and hold a reference to your FirebaseApp,
                 // where app is a Firebase.FirebaseApp property of your application class.
                 var app = Firebase.FirebaseApp.DefaultInstance;
-                Debug.Log("go on");
                 // Set a flag here to indicate whether Firebase is ready to use by your app.
             }
             else

@@ -251,7 +251,7 @@ public class Manager : MonoBehaviour
     public void Play()
     {
         Time.timeScale = 1;
-        //Debug.Log("play");
+        Debug.Log("play");
         UI_MainMenu.SetActive(false);
         UI_ScoreCounter.SetActive(true);
         if (endGame)

@@ -287,4 +287,24 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         Dead();
     }
+    public void Left()
+    {
+        if ( !blockedLeft && !isJumping && !isSliding)
+        {
+            startgame = true;
+            StartCoroutine(Jump("left"));
+            step++;
+            CheckSpawn();
+        }
+    }
+    public void Right()
+    {
+        if (!blockedLeft && !isJumping && !isSliding)
+        {
+            startgame = true;
+            StartCoroutine(Jump("right"));
+            step++;
+            CheckSpawn();
+        }
+    }
 }
